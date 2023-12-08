@@ -19,6 +19,10 @@ export default function OrderList() {
   const dispatch = useDispatch();
   const orders = useSelector(selectAllOrders);
 
+  const handleSearch = (searchParams) => {
+    dispatch(orderActions.getOrderList(searchParams));
+  };
+
   useEffect(() => {
     dispatch(orderActions.getOrderList());
   }, []);
@@ -37,7 +41,7 @@ export default function OrderList() {
           <NavBar />
           <Text style={orderListStyles.h1}>Sales Order List</Text>
           <View style={orderListStyles.content}>
-            <Search />
+            <Search onSearch={handleSearch}/>
             <View style={orderListStyles.header}>
               <Text style={orderListStyles.h2}>Order List</Text>
               <Text style={orderListStyles.h3}>Total Item: {totalItem}</Text>
@@ -47,8 +51,6 @@ export default function OrderList() {
                 <Text style={orderListStyles.text}>Add</Text>
               </TouchableOpacity>
             </View>
-              <CardOrder />
-              <CardOrder />
               <CardOrder />
           </View>
         </View>

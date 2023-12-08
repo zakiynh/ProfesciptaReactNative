@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { styles } from "../styles/searchStyle";
 import { FontAwesome } from "@expo/vector-icons";
 
-export default function Search() {
+export default function Search({ onSearch }) {
   const [keyword, setKeyword] = useState("");
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [orderDate, setOrderDate] = useState(new Date());
@@ -14,12 +14,17 @@ export default function Search() {
 
     if (selectedDate) {
       setOrderDate(selectedDate);
+      onSearch({ keyword, orderDate: selectedDate });
     }
   };
 
   const showDatePickerModal = () => {
     setShowDatePicker(true);
   };
+
+  useEffect(() => {
+    onSearch({ keyword, orderDate });
+  }, [keyword]);
 
   return (
     <View style={styles.container}>
