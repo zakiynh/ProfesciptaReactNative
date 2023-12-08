@@ -31,12 +31,12 @@ export default function Search() {
       />
       <TouchableOpacity
         onPress={showDatePickerModal}
-        style={{ flexDirection: "row", alignItems: "center" }}
+        style={{ ...styles.input, flexDirection: "row", alignItems: "center" }}
       >
         <FontAwesome name="calendar" size={20} color="black" />
         <TextInput
-          style={styles.input}
-          value={orderDate.toLocaleDateString()} // Format the date as needed
+          style={{ ...styles.input, marginLeft: 5, borderWidth: 0, borderColor: 'transparent', marginBottom: 9}}
+          value={orderDate.toLocaleDateString()}
           placeholder="Order Date"
           editable={false}
         />
